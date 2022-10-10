@@ -173,7 +173,7 @@ function GuiLibrary:CreateModule(window, name, enabledfunc, disabledfunc)
     local ScaledText = Instance.new("TextLabel")
 
     Module.Name = name
-    Module.Parent = windows[window].List
+    Module.Parent = GuiLibrary.HUDFrame[window].List
     Module.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     Module.BorderSizePixel = 0
     Module.Size = UDim2.new(1, 0, 0.060258247, 0)
@@ -227,8 +227,5 @@ function GuiLibrary:CreateModule(window, name, enabledfunc, disabledfunc)
         end
     end)
 end
-
-
-
 
 return GuiLibrary
