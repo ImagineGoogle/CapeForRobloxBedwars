@@ -54,6 +54,7 @@ function GuiLibrary:CreateMainGui()
     ScaledFrame.BorderSizePixel = 0
     ScaledFrame.Position = UDim2.new(0, 0, -1.5, 0)
     ScaledFrame.Size = UDim2.new(1, 0, 1, 0)
+    ScaledFrame.Active = true
 
     HUDFrame.Name = "HUDFrame"
     HUDFrame.Parent = ScaledFrame
