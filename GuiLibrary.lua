@@ -92,7 +92,7 @@ function GuiLibrary:CreateMainGui()
         print("Input began!")
         if input.KeyCode == Enum.KeyCode.Y and not gameProcessedEvent then
             print("toggled gui")
-            local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Linearm, Enum.EasingDirection.In)
+            local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In)
 
             if HUDFrame.Visible == true then
                 print("frame visible")
