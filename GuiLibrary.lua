@@ -12,8 +12,6 @@ local betterisfile = function(file)
 	return suc and res ~= nil
 end
 
-local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport or function() end
-
 local function loadModules()
 	local HttpService = game:GetService("HttpService")
 	if (readfile and isfile and betterisfile(saveName)) then
@@ -43,6 +41,8 @@ local function randomString()
 
     return table.concat(array)
 end
+
+loadModules()
 
 GuiLibrary.Gui = Instance.new("ScreenGui")
 local gui = GuiLibrary.Gui
