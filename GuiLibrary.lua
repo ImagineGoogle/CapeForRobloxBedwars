@@ -89,8 +89,9 @@ function GuiLibrary:CreateMainGui()
     UIAspectRatioConstraint_3.DominantAxis = Enum.DominantAxis.Height
 
     UIS.InputBegan:Connect(function(input, gameProcessedEvent)
+        print("Input began!")
         if input.KeyCode == Enum.KeyCode.Y and not gameProcessedEvent then
-            print("toggle gui")
+            print("toggled gui")
             local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Linearm, Enum.EasingDirection.In)
 
             if HUDFrame.Visible == true then
