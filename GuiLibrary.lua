@@ -3,6 +3,7 @@ local TS = game:GetService("TweenService")
 
 local GuiLibrary = {}
 local windows = {}
+local toggledColour = Color3.fromRGB(0, 106, 206)
 
 local function randomString()
     local randomlength = math.random(10,100)
@@ -97,6 +98,13 @@ function GuiLibrary:CreateMainGui()
                 task.spawn(function()
                     task.wait(0.3)
                     HUDFrame.Visible = false
+                    for i, v in pairs(HUDFrame:GetDescendants()) do
+                        if v:IsA("TextButton") and v:FindFirstChild("ScaledText") then
+                            if v.BackgroundColor3 ~= toggledColour then
+                                v.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+                            end
+                        end
+                    end
                 end)
                 TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, -1.4, 0)}):Play()
             else
@@ -239,6 +247,18 @@ function GuiLibrary:CreateModule(window, name, func)
     ScaledText.TextWrapped = true
     ScaledText.TextXAlignment = Enum.TextXAlignment.Left
 
+    Module.MouseEnter:Connect(function()
+        if Module.BackgroundColor3 ~= toggledColour then
+            Module.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        end
+    end)
+
+    Module.MouseLeave:Connect(function()
+        if Module.BackgroundColor3 ~= toggledColour then
+            Module.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+        end
+    end)
+
     Module.MouseButton1Click:Connect(function()
         if enabled == false then
             enabled = true
@@ -248,7 +268,7 @@ function GuiLibrary:CreateModule(window, name, func)
             if err then
                 warn(err)
             end
-            Module.BackgroundColor3 = Color3.fromRGB(0, 106, 206)
+            Module.BackgroundColor3 = toggledColour
             Module.ScaledText.TextColor3 = Color3.fromRGB(255, 255, 255)
         else
             enabled = false
