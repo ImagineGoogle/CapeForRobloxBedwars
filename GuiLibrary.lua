@@ -52,7 +52,7 @@ function GuiLibrary:CreateMainGui()
     ScaledFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     ScaledFrame.BackgroundTransparency = 1.000
     ScaledFrame.BorderSizePixel = 0
-    ScaledFrame.Position = UDim2.new(0, 0, -1.5, 0)
+    ScaledFrame.Position = UDim2.new(0, 0, -1.4, 0)
     ScaledFrame.Size = UDim2.new(1, 0, 1, 0)
     ScaledFrame.Active = true
 
@@ -98,7 +98,7 @@ function GuiLibrary:CreateMainGui()
                     task.wait(0.3)
                     HUDFrame.Visible = false
                 end)
-                TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, -1.5, 0)}):Play()
+                TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, -1.4, 0)}):Play()
             else
                 HUDFrame.Visible = true
                 TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, 0.5, 0)}):Play()
