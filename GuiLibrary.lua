@@ -87,6 +87,15 @@ function GuiLibrary:CreateMainGui()
     UIAspectRatioConstraint_3.AspectType = Enum.AspectType.ScaleWithParentSize
     UIAspectRatioConstraint_3.DominantAxis = Enum.DominantAxis.Height
 
+    UIS.InputBegan:Connect(function(input, gameProcessedEvent)
+        if input.KeyCode == Enum.KeyCode.Y and not gameProcessedEvent then
+            if HUDFrame.Visible == true then
+                HUDFrame.Visible = false
+            else
+                HUDFrame.Visible = true
+            end
+        end
+    end)
 end
 
 function GuiLibrary:CreateWindow(name)
