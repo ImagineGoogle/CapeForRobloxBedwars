@@ -92,12 +92,12 @@ function GuiLibrary:CreateMainGui()
         print("Input began!")
         if input.KeyCode == Enum.KeyCode.Y and not gameProcessedEvent then
             print("toggled gui")
-            local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In)
+            local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Linear, Enum.EasingDirection.In)
 
             if HUDFrame.Visible == true then
                 print("frame visible")
                 task.spawn(function()
-                    task.wait(0.1)
+                    task.wait(0.3)
                     HUDFrame.Visible = false
                 end)
                 TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, -1.5, 0)}):Play()
