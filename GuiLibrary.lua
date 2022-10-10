@@ -194,7 +194,7 @@ function GuiLibrary:CreateWindow(name)
     end)
 end
 
-function GuiLibrary:CreateModule(window, name, enabledfunc, disabledfunc)
+function GuiLibrary:CreateModule(window, name, func)
     local enabled = false
 
     local Module = Instance.new("TextButton")
@@ -239,7 +239,7 @@ function GuiLibrary:CreateModule(window, name, enabledfunc, disabledfunc)
     Module.MouseButton1Click:Connect(function()
         if enabled == false then
             enabled = true
-            local suc, err = pcall(enabledfunc)
+            local suc, err = pcall(func(true))
             if err then
                 warn(err)
             end
@@ -247,7 +247,7 @@ function GuiLibrary:CreateModule(window, name, enabledfunc, disabledfunc)
             Module.ScaledText.TextColor3 = Color3.fromRGB(255, 255, 255)
         else
             enabled = false
-            local suc, err = pcall(disabledfunc)
+            local suc, err = pcall(func(false))
             if err then
                 warn(err)
             end
