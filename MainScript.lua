@@ -6,6 +6,9 @@ GuiLibrary:CreateMainGui()
 
 GuiLibrary:CreateWindow("Combat")
 GuiLibrary:CreateWindow("Blatant")
+GuiLibrary:CreateWindow("Render")
+GuiLibrary:CreateWindow("Utility")
+GuiLibrary:CreateWindow("World")
 
 GuiLibrary:CreateModule(
     "Combat",
