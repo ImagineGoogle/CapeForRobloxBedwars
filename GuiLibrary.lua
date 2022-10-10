@@ -89,20 +89,16 @@ function GuiLibrary:CreateMainGui()
     UIAspectRatioConstraint_3.DominantAxis = Enum.DominantAxis.Height
 
     UIS.InputBegan:Connect(function(input, gameProcessedEvent)
-        print("Input began!")
         if input.KeyCode == Enum.KeyCode.Y and not gameProcessedEvent then
-            print("toggled gui")
             local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Linear, Enum.EasingDirection.In)
 
             if HUDFrame.Visible == true then
-                print("frame visible")
                 task.spawn(function()
                     task.wait(0.3)
                     HUDFrame.Visible = false
                 end)
                 TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, -1.5, 0)}):Play()
             else
-                print("frame not visible")
                 HUDFrame.Visible = true
                 TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, 0.5, 0)}):Play()
             end
@@ -236,7 +232,7 @@ function GuiLibrary:CreateModule(window, name, enabledfunc, disabledfunc)
                 warn(err)
             end
             Module.BackgroundColor3 = Color3.fromRGB(0, 106, 206)
-            Module.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Module.ScaledText.TextColor3 = Color3.fromRGB(255, 255, 255)
         else
             enabled = false
             local suc, err = pcall(disabledfunc)
@@ -244,7 +240,7 @@ function GuiLibrary:CreateModule(window, name, enabledfunc, disabledfunc)
                 warn(err)
             end
             Module.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-            Module.TextColor3 = Color3.fromRGB(180, 180, 180)
+            Module.ScaledText.TextColor3 = Color3.fromRGB(180, 180, 180)
         end
     end)
 end
