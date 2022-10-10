@@ -239,7 +239,9 @@ function GuiLibrary:CreateModule(window, name, func)
     Module.MouseButton1Click:Connect(function()
         if enabled == false then
             enabled = true
-            local suc, err = pcall(func(true))
+            local suc, err = pcall(function()
+                func(true)
+            end)
             if err then
                 warn(err)
             end
@@ -247,7 +249,9 @@ function GuiLibrary:CreateModule(window, name, func)
             Module.ScaledText.TextColor3 = Color3.fromRGB(255, 255, 255)
         else
             enabled = false
-            local suc, err = pcall(func(false))
+            local suc, err = pcall(function()
+                func(false)
+            end)
             if err then
                 warn(err)
             end
