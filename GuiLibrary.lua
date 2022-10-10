@@ -20,6 +20,7 @@ local gui = GuiLibrary.Gui
 gui.DisplayOrder = 99999
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+gui.IgnoreGuiInset = true
 gui.OnTopOfCoreBlur = true
 gui.Name = randomString()
 if gethui and (not KRNL_LOADED) then
@@ -51,7 +52,7 @@ function GuiLibrary:CreateMainGui()
     ScaledFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     ScaledFrame.BackgroundTransparency = 1.000
     ScaledFrame.BorderSizePixel = 0
-    ScaledFrame.Position = UDim2.new(0, 0, 0.5, 0)
+    ScaledFrame.Position = UDim2.new(0, 0, -1.5, 0)
     ScaledFrame.Size = UDim2.new(1, 0, 1, 0)
 
     HUDFrame.Name = "HUDFrame"
@@ -89,10 +90,17 @@ function GuiLibrary:CreateMainGui()
 
     UIS.InputBegan:Connect(function(input, gameProcessedEvent)
         if input.KeyCode == Enum.KeyCode.Y and not gameProcessedEvent then
+            local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Linearm, Enum.EasingDirection.In)
+
             if HUDFrame.Visible == true then
-                HUDFrame.Visible = false
+                task.spawn(function()
+                    task.wait(0.1)
+                    HUDFrame.Visible = false
+                end)
+                TS:Create(ScaledFrame, tweenInfo, {Position = UDim.new(0, 0, -1.5, 0)}):Play()
             else
                 HUDFrame.Visible = true
+                TS:Create(ScaledFrame, tweenInfo, {Position = UDim.new(0, 0, 0.5, 0)}):Play()
             end
         end
     end)
@@ -127,7 +135,7 @@ function GuiLibrary:CreateWindow(name)
     Title.AnchorPoint = Vector2.new(0, 0.5)
     Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Title.BackgroundTransparency = 1.000
-    Title.Position = UDim2.new(0.0346534587, 0, 0.5, 0)
+    Title.Position = UDim2.new(0.04, 0, 0.5, 0)
     Title.Size = UDim2.new(0.42600891, 0, 0.414634109, 0)
     Title.Font = Enum.Font.SourceSansSemibold
     Title.Text = tostring(name)
