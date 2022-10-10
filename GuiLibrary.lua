@@ -171,6 +171,7 @@ function GuiLibrary:CreateWindow(name)
     List.BorderSizePixel = 0
     List.Position = UDim2.new(0, 0, 0.999999166, 0)
     List.Size = UDim2.new(1, 0, 17, 0)
+    List.Visible = false
 
     UIListLayout.Parent = List
 
@@ -181,6 +182,16 @@ function GuiLibrary:CreateWindow(name)
     UICorner.Parent = Window
 
     table.insert(windows, Window)
+
+    DropDown.MouseButton1Click:Connect(function()
+        if DropDown.Rotation == 270 then
+            DropDown.Rotation = 90
+            List.Visible = true
+        else
+            DropDown.Rotation = 270
+            List.Visible = false
+        end
+    end)
 end
 
 function GuiLibrary:CreateModule(window, name, enabledfunc, disabledfunc)
