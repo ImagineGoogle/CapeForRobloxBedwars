@@ -111,7 +111,7 @@ function GuiLibrary:CreateWindow(name)
 
     local Window = Instance.new("Frame")
     local Title = Instance.new("TextLabel")
-    local DropDown = Instance.new("ImageLabel")
+    local DropDown = Instance.new("ImageButton")
     local Line = Instance.new("Frame")
     local List = Instance.new("Frame")
     local UIListLayout = Instance.new("UIListLayout")
