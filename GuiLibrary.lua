@@ -163,6 +163,7 @@ function GuiLibrary:CreateWindow(name)
     Line.BorderSizePixel = 0
     Line.Position = UDim2.new(0, 0, 1, 0)
     Line.Size = UDim2.new(1, 0, 0.0731707215, 0)
+    Line.Visible = false
 
     List.Name = "List"
     List.Parent = Window
@@ -187,9 +188,11 @@ function GuiLibrary:CreateWindow(name)
         if DropDown.Rotation == 270 then
             DropDown.Rotation = 90
             List.Visible = true
+            Line.Visible = true
         else
             DropDown.Rotation = 270
             List.Visible = false
+            Line.Visible = false
         end
     end)
 end
