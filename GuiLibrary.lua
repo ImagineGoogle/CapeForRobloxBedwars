@@ -90,15 +90,18 @@ function GuiLibrary:CreateMainGui()
 
     UIS.InputBegan:Connect(function(input, gameProcessedEvent)
         if input.KeyCode == Enum.KeyCode.Y and not gameProcessedEvent then
+            print("toggle gui")
             local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Linearm, Enum.EasingDirection.In)
 
             if HUDFrame.Visible == true then
+                print("frame visible")
                 task.spawn(function()
                     task.wait(0.1)
                     HUDFrame.Visible = false
                 end)
                 TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, -1.5, 0)}):Play()
             else
+                print("frame not visible")
                 HUDFrame.Visible = true
                 TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, 0.5, 0)}):Play()
             end
