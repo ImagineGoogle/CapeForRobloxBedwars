@@ -97,10 +97,10 @@ function GuiLibrary:CreateMainGui()
                     task.wait(0.1)
                     HUDFrame.Visible = false
                 end)
-                TS:Create(ScaledFrame, tweenInfo, {Position = UDim.new(0, 0, -1.5, 0)}):Play()
+                TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, -1.5, 0)}):Play()
             else
                 HUDFrame.Visible = true
-                TS:Create(ScaledFrame, tweenInfo, {Position = UDim.new(0, 0, 0.5, 0)}):Play()
+                TS:Create(ScaledFrame, tweenInfo, {Position = UDim2.new(0, 0, 0.5, 0)}):Play()
             end
         end
     end)
