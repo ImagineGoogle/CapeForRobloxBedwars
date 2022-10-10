@@ -3,7 +3,35 @@ local TS = game:GetService("TweenService")
 
 local GuiLibrary = {}
 local windows = {}
+local modules = {}
+local saveName = "CapeSave.lua"
 local toggledColour = Color3.fromRGB(0, 106, 206)
+
+local betterisfile = function(file)
+	local suc, res = pcall(function() return readfile(file) end)
+	return suc and res ~= nil
+end
+
+local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport or function() end
+
+local function loadModules()
+	local HttpService = game:GetService("HttpService")
+	if (readfile and isfile and betterisfile(saveName)) then
+		modules = HttpService:JSONDecode(readfile(saveName))
+		for i, v in pairs(modules) do
+			print(i, v)
+		end
+	end
+end
+
+local function saveModules()
+	local json
+	local HttpService = game:GetService("HttpService")
+	if (writefile) then
+		json = HttpService:JSONEncode(modules)
+		writefile(saveName, json)
+	end
+end
 
 local function randomString()
     local randomlength = math.random(10,100)
@@ -262,6 +290,9 @@ function GuiLibrary:CreateModule(window, name, func)
     Module.MouseButton1Click:Connect(function()
         if enabled == false then
             enabled = true
+            modules[name] = true
+            saveModules()
+
             local suc, err = pcall(function()
                 func(true)
             end)
@@ -272,6 +303,9 @@ function GuiLibrary:CreateModule(window, name, func)
             Module.ScaledText.TextColor3 = Color3.fromRGB(255, 255, 255)
         else
             enabled = false
+            modules[name] = false
+            saveModules()
+
             local suc, err = pcall(function()
                 func(false)
             end)
@@ -282,6 +316,13 @@ function GuiLibrary:CreateModule(window, name, func)
             Module.ScaledText.TextColor3 = Color3.fromRGB(180, 180, 180)
         end
     end)
+
+    if modules[name] then
+        firesignal(Module.MouseButton1Click)
+    else
+        modules[name] = false
+        saveModules()
+    end
 end
 
 return GuiLibrary
