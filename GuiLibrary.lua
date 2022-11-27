@@ -58,7 +58,7 @@ else
     gui.Parent = game:GetService("CoreGui")
 end
 
-function GuiLibrary:CreateMainGui()
+function GuiLibrary.CreateMainGui()
 
 
     GuiLibrary.ScaledFrame = Instance.new("Frame")
@@ -140,7 +140,7 @@ function GuiLibrary:CreateMainGui()
     end)
 end
 
-function GuiLibrary:CreateWindow(name)
+function GuiLibrary.CreateWindow(name)
 
     local Window = Instance.new("Frame")
     local Title = Instance.new("TextLabel")
@@ -230,7 +230,7 @@ function GuiLibrary:CreateWindow(name)
     end)
 end
 
-function GuiLibrary:CreateModule(window, name, func)
+function GuiLibrary.CreateModule(window, name, func)
     local enabled = false
 
     local Module = Instance.new("TextButton")
