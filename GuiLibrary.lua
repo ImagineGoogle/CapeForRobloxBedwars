@@ -16,9 +16,6 @@ local function loadModules()
 	local HttpService = game:GetService("HttpService")
 	if (readfile and isfile and betterisfile(saveName)) then
 		modules = HttpService:JSONDecode(readfile(saveName))
-		for i, v in pairs(modules) do
-			print(i, v)
-		end
 	end
 end
 
