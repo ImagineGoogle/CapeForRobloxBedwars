@@ -4,7 +4,7 @@ local TS = game:GetService("TweenService")
 local GuiLibrary = {}
 local windows = {}
 local modules = {}
-local saveName = tostring(game.GameId) .. "-" .. "CapeSave.lua"
+local saveName = tostring(game.GameId) .. "-" .. "CapeSave.json"
 local toggledColour = Color3.fromRGB(0, 106, 206)
 
 local betterisfile = function(file)
