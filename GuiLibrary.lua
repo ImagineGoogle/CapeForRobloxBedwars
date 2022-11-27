@@ -196,7 +196,7 @@ function GuiLibrary.CreateWindow(name)
     Line.BorderSizePixel = 0
     Line.Position = UDim2.new(0, 0, 1, 0)
     Line.Size = UDim2.new(1, 0, 0.0731707215, 0)
-    Line.Visible = false
+    Line.Visible = true
 
     List.Name = "List"
     List.Parent = Window
