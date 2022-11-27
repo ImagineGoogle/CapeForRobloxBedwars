@@ -184,7 +184,7 @@ function GuiLibrary.CreateWindow(name)
     DropDown.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     DropDown.BackgroundTransparency = 1.000
     DropDown.Position = UDim2.new(0.879999995, 0, 0.24390246, 0)
-    DropDown.Rotation = 270.000
+    DropDown.Rotation = 90
     DropDown.Size = UDim2.new(0.0896860883, 0, 0.48780483, 0)
     DropDown.Image = "rbxassetid://6993472329"
     DropDown.ImageColor3 = Color3.fromRGB(207, 207, 207)
@@ -205,7 +205,7 @@ function GuiLibrary.CreateWindow(name)
     List.BorderSizePixel = 0
     List.Position = UDim2.new(0, 0, 0.999999166, 0)
     List.Size = UDim2.new(1, 0, 17, 0)
-    List.Visible = false
+    List.Visible = true
 
     UIListLayout.Parent = List
 
