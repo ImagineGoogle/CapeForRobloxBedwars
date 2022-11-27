@@ -291,7 +291,9 @@ function GuiLibrary.CreateModule(window, name, func)
             saveModules()
 
             local suc, err = pcall(function()
-                func(true)
+                task.spawn(function()
+                    func(true)
+                end)
             end)
             if err then
                 warn(err)
@@ -304,7 +306,9 @@ function GuiLibrary.CreateModule(window, name, func)
             saveModules()
 
             local suc, err = pcall(function()
-                func(false)
+                task.spawn(function()
+                    func(false)
+                end)
             end)
             if err then
                 warn(err)
