@@ -280,24 +280,24 @@ function GuiLibrary.CreateModule(window, name, func)
 
     local function enable()
         enabled = true
-            modules[name] = true
-            saveModules()
+        modules[name].Enabled = true
+        saveModules()
 
-            local suc, err = pcall(function()
-                task.spawn(function()
-                    func(true)
-                end)
+        local suc, err = pcall(function()
+            task.spawn(function()
+                func(true)
             end)
-            if err then
-                warn(err)
-            end
-            Module.BackgroundColor3 = toggledColour
-            Module.ScaledText.TextColor3 = Color3.fromRGB(255, 255, 255)
+        end)
+        if err then
+            warn(err)
+        end
+        Module.BackgroundColor3 = toggledColour
+        Module.ScaledText.TextColor3 = Color3.fromRGB(255, 255, 255)
     end
 
     local function disable()
         enabled = false
-        modules[name] = false
+        modules[name].Enabled = false
         saveModules()
 
         local suc, err = pcall(function()
@@ -340,8 +340,10 @@ function GuiLibrary.CreateModule(window, name, func)
         end
     end)
 
-    if modules[name].Enabled == true then
-        firesignal(Module.MouseButton1Click)
+    if modules[name] then
+        if modules[name].Enabled == true then
+            firesignal(Module.MouseButton1Click)
+        end
     else
         modules[name] = {Name = name, Enabled = false, Function = func}
         saveModules()
