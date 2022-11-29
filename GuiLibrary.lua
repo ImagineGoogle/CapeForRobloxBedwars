@@ -288,13 +288,13 @@ function GuiLibrary.CreateModule(window, name, func)
     KeyBindLabel.Position = UDim2.new(0.95, 0, 0.5, 0)
     KeyBindLabel.SizeConstraint = Enum.SizeConstraint.RelativeYY
     KeyBindLabel.Size = UDim2.new(0.5, 0, 0.5, 0)
-    KeyBindLabel.Font = Enum.Font.GothamBold
+    KeyBindLabel.Font = Enum.Font.SourceSans
     KeyBindLabel.Text = ""
-    KeyBindLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    KeyBindLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
     KeyBindLabel.TextScaled = true
     KeyBindLabel.Visible = false
 
-    UICorner.CornerRadius = UDim.new(0.05, 0)
+    UICorner.CornerRadius = UDim.new(0.1, 0)
     UICorner.Parent = KeyBindLabel
 
     local function enable()
