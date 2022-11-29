@@ -308,9 +308,9 @@ function GuiLibrary.CreateModule(window, name, func)
     end
 
     function options.Toggle(enabled)
-        if enabled then
+        if enabled == true then
             enable()
-        else
+        elseif enabled == false then
             disable()
         end
     end
