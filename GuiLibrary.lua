@@ -18,9 +18,7 @@ local function loadModules()
 	if (readfile and isfile and betterisfile(folderDirectory .. saveName)) then
 		modules = HttpService:JSONDecode(readfile(folderDirectory .. saveName))
         for i,v in pairs(modules) do
-            if v.KeyBind then
-                print(v.KeyBind)
-            end
+            print(v.KeyBind)
         end
 	end
 end
