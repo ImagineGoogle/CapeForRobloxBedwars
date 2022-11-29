@@ -379,7 +379,7 @@ function GuiLibrary.CreateModule(window, name, func)
             else
                 disable()
             end
-        elseif waitingForInput == true and input.KeyCode then
+        elseif waitingForInput == true and input.UserInputType == Enum.UserInputType.Keyboard then
             if input.KeyCode == Enum.KeyCode.Escape then
                 modules[name].KeyBind = nil
                 KeyBindLabel.Visible = false
