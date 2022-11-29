@@ -4,18 +4,19 @@ local TS = game:GetService("TweenService")
 local GuiLibrary = {}
 local windows = {}
 local modules = {}
-local saveName = tostring(game.GameId) .. "-" .. "CapeSave.json"
+local folderDirectory = "cape/"
+local saveName = tostring(game.GameId) .. "-" .. "Save.json"
 local toggledColour = Color3.fromRGB(0, 106, 206)
 
-local betterisfile = function(file)
+local function betterisfile(file)
 	local suc, res = pcall(function() return readfile(file) end)
 	return suc and res ~= nil
 end
 
 local function loadModules()
 	local HttpService = game:GetService("HttpService")
-	if (readfile and isfile and betterisfile(saveName)) then
-		modules = HttpService:JSONDecode(readfile(saveName))
+	if (readfile and isfile and betterisfile(folderDirectory .. saveName)) then
+		modules = HttpService:JSONDecode(readfile(folderDirectory .. saveName))
 	end
 end
 
@@ -37,6 +38,10 @@ local function randomString()
     end
 
     return table.concat(array)
+end
+
+if not isfolder("cape") then
+    makefolder("cape")
 end
 
 loadModules()
@@ -335,14 +340,20 @@ function GuiLibrary.CreateModule(window, name, func)
         end
     end)
 
-    if modules[name] then
+    if modules[name].Enabled == true then
         firesignal(Module.MouseButton1Click)
     else
-        modules[name] = false
+        modules[name] = {Name = name, Enabled = false, Function = func}
         saveModules()
     end
 
     return options
+end
+
+function GuiLibrary.Panic()
+    for _, module in pairs(modules) do
+        module.Function(false)
+    end
 end
 
 return GuiLibrary
