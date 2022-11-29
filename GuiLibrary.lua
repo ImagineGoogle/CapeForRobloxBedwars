@@ -345,7 +345,7 @@ function GuiLibrary.CreateModule(window, name, func)
         end
         if modules[name].KeyBind ~= nil then
             KeyBindLabel.Visible = true
-            KeyBindLabel.Text = tostring(modules[name].KeyBind):sub(14)
+            KeyBindLabel.Text = modules[name].KeyBind
         end
     else
         modules[name] = {Name = name, Enabled = false, KeyBind = nil, Function = func}
