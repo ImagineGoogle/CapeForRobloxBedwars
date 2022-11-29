@@ -294,7 +294,7 @@ function GuiLibrary.CreateModule(window, name, func)
     KeyBindLabel.TextScaled = true
     KeyBindLabel.Visible = false
 
-    UICorner.CornerRadius = UDim.new(0.25, 0)
+    UICorner.CornerRadius = UDim.new(0.22, 0)
     UICorner.Parent = KeyBindLabel
 
     local function enable()
