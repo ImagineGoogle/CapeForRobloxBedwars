@@ -244,6 +244,7 @@ function GuiLibrary.CreateModule(window, name, func)
     local Divider = Instance.new("Frame")
     local ScaledText = Instance.new("TextLabel")
     local KeyBindLabel = Instance.new("TextLabel")
+    local UICorner = Instance.new("UICorner")
 
     Module.Name = name
     Module.Parent = GuiLibrary.HUDFrame[window].List
@@ -286,12 +287,15 @@ function GuiLibrary.CreateModule(window, name, func)
     KeyBindLabel.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     KeyBindLabel.Position = UDim2.new(0.95, 0, 0.5, 0)
     KeyBindLabel.SizeConstraint = Enum.SizeConstraint.RelativeYY
-    KeyBindLabel.Size = UDim2.new(0.8, 0, 0.8, 0)
+    KeyBindLabel.Size = UDim2.new(0.5, 0, 0.5, 0)
     KeyBindLabel.Font = Enum.Font.GothamBold
     KeyBindLabel.Text = ""
     KeyBindLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     KeyBindLabel.TextScaled = true
     KeyBindLabel.Visible = false
+
+    UICorner.CornerRadius = UDim.new(0.05, 0)
+    UICorner.Parent = KeyBindLabel
 
     local function enable()
         enabled = true
