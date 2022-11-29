@@ -231,6 +231,7 @@ function GuiLibrary.CreateWindow(name)
 end
 
 function GuiLibrary.CreateModule(window, name, func)
+    local options = {}
     local enabled = false
 
     local Module = Instance.new("TextButton")
@@ -272,6 +273,48 @@ function GuiLibrary.CreateModule(window, name, func)
     ScaledText.TextWrapped = true
     ScaledText.TextXAlignment = Enum.TextXAlignment.Left
 
+    local function enable()
+        enabled = true
+            modules[name] = true
+            saveModules()
+
+            local suc, err = pcall(function()
+                task.spawn(function()
+                    func(true)
+                end)
+            end)
+            if err then
+                warn(err)
+            end
+            Module.BackgroundColor3 = toggledColour
+            Module.ScaledText.TextColor3 = Color3.fromRGB(255, 255, 255)
+    end
+
+    local function disable()
+        enabled = false
+        modules[name] = false
+        saveModules()
+
+        local suc, err = pcall(function()
+            task.spawn(function()
+                func(false)
+            end)
+        end)
+        if err then
+            warn(err)
+        end
+        Module.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+        Module.ScaledText.TextColor3 = Color3.fromRGB(180, 180, 180)
+    end
+
+    function options.Toggle(enabled)
+        if enabled then
+            enable()
+        else
+            disable()
+        end
+    end
+
     Module.MouseEnter:Connect(function()
         if Module.BackgroundColor3 ~= toggledColour then
             Module.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -286,35 +329,9 @@ function GuiLibrary.CreateModule(window, name, func)
 
     Module.MouseButton1Click:Connect(function()
         if enabled == false then
-            enabled = true
-            modules[name] = true
-            saveModules()
-
-            local suc, err = pcall(function()
-                task.spawn(function()
-                    func(true)
-                end)
-            end)
-            if err then
-                warn(err)
-            end
-            Module.BackgroundColor3 = toggledColour
-            Module.ScaledText.TextColor3 = Color3.fromRGB(255, 255, 255)
+            enable()
         else
-            enabled = false
-            modules[name] = false
-            saveModules()
-
-            local suc, err = pcall(function()
-                task.spawn(function()
-                    func(false)
-                end)
-            end)
-            if err then
-                warn(err)
-            end
-            Module.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-            Module.ScaledText.TextColor3 = Color3.fromRGB(180, 180, 180)
+            disable()
         end
     end)
 
@@ -324,6 +341,8 @@ function GuiLibrary.CreateModule(window, name, func)
         modules[name] = false
         saveModules()
     end
+
+    return options
 end
 
 return GuiLibrary
