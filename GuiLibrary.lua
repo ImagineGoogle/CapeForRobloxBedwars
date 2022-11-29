@@ -393,6 +393,7 @@ function GuiLibrary.CreateModule(window, name, func)
                 modules[name].KeyBind = nil
                 KeyBindLabel.Visible = false
                 KeyBindLabel.Text = ""
+                waitingForInput = false
             else
                 modules[name].KeyBind = input.KeyCode
                 KeyBindLabel.Visible = true
