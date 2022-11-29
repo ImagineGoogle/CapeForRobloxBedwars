@@ -372,7 +372,7 @@ function GuiLibrary.CreateModule(window, name, func)
         end
     end)
 
-    UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    UIS.InputBegan:Connect(function(input, gameProcessedEvent)
         if (input.KeyCode == modules[name].KeyBind) and (not gameProcessedEvent) and (waitingForInput == false) then
             if enabled == false then
                 enable()
