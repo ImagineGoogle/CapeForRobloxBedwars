@@ -381,7 +381,7 @@ function GuiLibrary.CreateModule(window, name, func)
     end)
 
     UIS.InputBegan:Connect(function(input, gameProcessedEvent)
-        if (input.KeyCode == modules[name].KeyBind) and (not gameProcessedEvent) and (waitingForInput == false) then
+        if (tostring(input.KeyCode):sub(14) == modules[name].KeyBind) and (not gameProcessedEvent) and (waitingForInput == false) then
             if enabled == false then
                 enable()
             else
@@ -395,7 +395,7 @@ function GuiLibrary.CreateModule(window, name, func)
                 waitingForInput = false
                 saveModules()
             else
-                modules[name].KeyBind = input.KeyCode
+                modules[name].KeyBind = tostring(input.KeyCode):sub(14)
                 KeyBindLabel.Visible = true
                 KeyBindLabel.Text = tostring(input.KeyCode):sub(14)
                 waitingForInput = false
