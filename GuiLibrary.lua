@@ -25,7 +25,7 @@ local function saveModules()
 	local HttpService = game:GetService("HttpService")
 	if (writefile) then
 		json = HttpService:JSONEncode(modules)
-		writefile(saveName, json)
+		writefile(folderDirectory .. saveName, json)
 	end
 end
 
@@ -238,10 +238,12 @@ end
 function GuiLibrary.CreateModule(window, name, func)
     local options = {}
     local enabled = false
+    local waitingForInput = false
 
     local Module = Instance.new("TextButton")
     local Divider = Instance.new("Frame")
     local ScaledText = Instance.new("TextLabel")
+    local KeyBindLabel = Instance.new("TextLabel")
 
     Module.Name = name
     Module.Parent = GuiLibrary.HUDFrame[window].List
@@ -277,6 +279,19 @@ function GuiLibrary.CreateModule(window, name, func)
     ScaledText.TextSize = 14.000
     ScaledText.TextWrapped = true
     ScaledText.TextXAlignment = Enum.TextXAlignment.Left
+
+    KeyBindLabel.Name = "KeyBindLabel"
+    KeyBindLabel.Parent = Module
+    KeyBindLabel.AnchorPoint = Vector2.new(0.95, 0.5)
+    KeyBindLabel.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    KeyBindLabel.Position = UDim2.new(0.95, 0, 0.5, 0)
+    KeyBindLabel.SizeConstraint = Enum.SizeConstraint.RelativeYY
+    KeyBindLabel.Size = UDim2.new(0.8, 0, 0.8, 0)
+    KeyBindLabel.Font = Enum.Font.GothamBold
+    KeyBindLabel.Text = ""
+    KeyBindLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    KeyBindLabel.TextScaled = true
+    KeyBindLabel.Visible = false
 
     local function enable()
         enabled = true
@@ -320,6 +335,15 @@ function GuiLibrary.CreateModule(window, name, func)
         end
     end
 
+    if modules[name] then
+        if modules[name].Enabled == true then
+            firesignal(Module.MouseButton1Click)
+        end
+    else
+        modules[name] = {Name = name, Enabled = false, KeyBind = nil, Function = func}
+        saveModules()
+    end
+
     Module.MouseEnter:Connect(function()
         if Module.BackgroundColor3 ~= toggledColour then
             Module.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -340,14 +364,32 @@ function GuiLibrary.CreateModule(window, name, func)
         end
     end)
 
-    if modules[name] then
-        if modules[name].Enabled == true then
-            firesignal(Module.MouseButton1Click)
+    Module.MouseButton2Click:Connect(function()
+        if waitingForInput == false then
+            waitingForInput = true
+            KeyBindLabel.Visible = true
+            KeyBindLabel.Text = "..."
         end
-    else
-        modules[name] = {Name = name, Enabled = false, Function = func}
-        saveModules()
-    end
+    end)
+
+    UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+        if (input.KeyCode == modules[name].KeyBind) and (not gameProcessedEvent) and (waitingForInput == false) then
+            if enabled == false then
+                enable()
+            else
+                disable()
+            end
+        elseif waitingForInput == true and input.KeyCode then
+            if input.KeyCode == Enum.KeyCode.Escape then
+                modules[name].KeyBind = nil
+                KeyBindLabel.Visible = false
+                KeyBindLabel.Text = ""
+            end
+            modules[name].KeyBind = input.KeyCode
+            KeyBindLabel.Visible = true
+            KeyBindLabel.Text = tostring(input.KeyCode):sub(14)
+        end
+    end)
 
     return options
 end
