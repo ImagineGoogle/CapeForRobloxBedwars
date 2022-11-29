@@ -17,9 +17,6 @@ local function loadModules()
 	local HttpService = game:GetService("HttpService")
 	if (readfile and isfile and betterisfile(folderDirectory .. saveName)) then
 		modules = HttpService:JSONDecode(readfile(folderDirectory .. saveName))
-        for i,v in pairs(modules) do
-            print(v.KeyBind)
-        end
 	end
 end
 
@@ -343,9 +340,7 @@ function GuiLibrary.CreateModule(window, name, func)
     end
 
     if modules[name] then
-        print("Module is in the table")
         if modules[name].Enabled == true then
-            print("Module is enabled")
             enable()
         end
         if modules[name].KeyBind ~= nil then
