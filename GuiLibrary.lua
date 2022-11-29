@@ -409,7 +409,9 @@ end
 
 function GuiLibrary.Panic()
     for _, module in pairs(modules) do
-        module.Function(false)
+        if module.Function then
+            module.Function(false)
+        end
     end
 end
 
