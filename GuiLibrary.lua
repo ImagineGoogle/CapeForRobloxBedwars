@@ -18,7 +18,9 @@ local function loadModules()
 	if (readfile and isfile and betterisfile(folderDirectory .. saveName)) then
 		modules = HttpService:JSONDecode(readfile(folderDirectory .. saveName))
         for i,v in pairs(modules) do
-            print(i,v)
+            if v.KeyBind then
+                print(v.KeyBind)
+            end
         end
 	end
 end
@@ -398,11 +400,13 @@ function GuiLibrary.CreateModule(window, name, func)
                 KeyBindLabel.Visible = false
                 KeyBindLabel.Text = ""
                 waitingForInput = false
+                saveModules()
             else
                 modules[name].KeyBind = input.KeyCode
                 KeyBindLabel.Visible = true
                 KeyBindLabel.Text = tostring(input.KeyCode):sub(14)
                 waitingForInput = false
+                saveModules()
             end
         end
     end)
