@@ -334,10 +334,10 @@ function GuiLibrary.CreateModule(window, name, func)
         Module.ScaledText.TextColor3 = Color3.fromRGB(180, 180, 180)
     end
 
-    function options.Toggle(enabled)
-        if enabled == true then
+    function options.Toggle(moduleEnabled)
+        if moduleEnabled == true then
             enable()
-        elseif enabled == false then
+        elseif moduleEnabled == false then
             disable()
         end
     end
@@ -346,7 +346,11 @@ function GuiLibrary.CreateModule(window, name, func)
         print("Module is in the table")
         if modules[name].Enabled == true then
             print("Module is enabled")
-            firesignal(Module.MouseButton1Click)
+            enable()
+        end
+        if modules[name].KeyBind ~= nil then
+            KeyBindLabel.Visible = true
+            KeyBindLabel.Text = tostring(modules[name].KeyBind):sub(14)
         end
     else
         modules[name] = {Name = name, Enabled = false, KeyBind = nil, Function = func}
