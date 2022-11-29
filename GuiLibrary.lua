@@ -384,10 +384,12 @@ function GuiLibrary.CreateModule(window, name, func)
                 modules[name].KeyBind = nil
                 KeyBindLabel.Visible = false
                 KeyBindLabel.Text = ""
+            else
+                modules[name].KeyBind = input.KeyCode
+                KeyBindLabel.Visible = true
+                KeyBindLabel.Text = tostring(input.KeyCode):sub(14)
+                waitingForInput = false
             end
-            modules[name].KeyBind = input.KeyCode
-            KeyBindLabel.Visible = true
-            KeyBindLabel.Text = tostring(input.KeyCode):sub(14)
         end
     end)
 
